@@ -1,0 +1,9 @@
+<apex:page controller="ApexZipSampleController">
+<apex:form >
+    <apex:pageblock > 
+        <apex:commandlink action="{!switch}" target="_blank">
+            <apex:commandButton value="Switch"/>
+        </apex:commandLink>
+    </apex:pageblock>
+</apex:form>
+</apex:page>

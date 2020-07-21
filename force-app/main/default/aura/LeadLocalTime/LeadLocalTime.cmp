@@ -1,0 +1,18 @@
+<aura:component controller="LocalTimeController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    <!--aura:handler name="init" value="{!this}" action="{!c.init }" /-->
+    <aura:attribute name="objectRecord" type="Object" description="The Integration Details"/>
+    <aura:attribute name="simpleRecord" type="Object" description="The record object to be displayed"/>
+    <aura:attribute name="localTime" type="String" />
+    
+    <force:recordData aura:id="objrecord" fields="Id,Name,Latitude,Longitude" recordId="{!v.recordId}" targetError="{!v.recordError}"
+                      targetRecord="{!v.objectRecord}" targetFields="{!v.simpleRecord}" recordUpdated="{!c.doInit}" mode="VIEW"/> 
+    
+    <!-- <force:recordData aura:id="objrecord" layoutType="FULL" recordId="{!v.recordId}" targetError="{!v.recordError}"
+                      targetRecord="{!v.objectRecord}" targetFields="{!v.simpleRecord}" recordUpdated="{!c.doInit}" mode="VIEW"/> -->
+    
+    <div class="demo-only" style="padding: 1rem; background: rgb(22, 50, 92);">
+        <div class="slds-text-color_inverse slds-text-heading_medium">Local Time : {!v.localTime}</div>
+    </div>
+    
+    
+</aura:component>

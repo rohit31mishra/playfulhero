@@ -1,0 +1,4 @@
+<aura:component >
+    <c:Assign_1_1_ChildCmp/>
+    <c:Assign_1_2_ChildCmp/>
+</aura:component>

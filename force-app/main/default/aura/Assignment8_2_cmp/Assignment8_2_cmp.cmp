@@ -1,0 +1,67 @@
+<aura:component controller="CaseCreationCls">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="LeadRec" type="Lead[]"/>
+    
+    <aura:attribute name="disableAndHideTable" type="string" default="true"/>
+    <aura:attribute name="LeadItem" type="Lead" default="{'LastName':'',
+                                                         'Company':'',
+                                                         'Phone':'',
+                                                         'Status':'',
+                                                         'LeadSource':'',
+                                                         'sobjectType':'Lead'}"/>
+    <lightning:button label="Create New" onclick="{!c.createLeadRecord}" />
+    <aura:if isTrue="{!v.disableAndHideTable == 'true'}">
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Name">&nbsp;&nbsp;</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Name">LastName</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Name">Company</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Name">Phone</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Name">Status</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Name">LeadSource</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.LeadRec}" var="Lead" indexVar="index"> 
+                    <tr>
+                        <td scope="row" data-label="Opportunity Name">
+                            <div class="slds-truncate" >
+                                <lightning:icon title="{!index}" iconName="standard:lead" size="small" onclick="{!c.displayRowDetail}" /></div>
+                        </td>
+                        <td scope="row" data-label="Opportunity Name">
+                            <div class="slds-truncate" title="{!Lead.Name}">{!Lead.LastName}</div>
+                        </td>
+                        <td scope="row" data-label="Opportunity Name">
+                            <div class="slds-truncate" title="{!Lead.Name}">{!Lead.Company}</div>
+                        </td>
+                        <td scope="row" data-label="Opportunity Name">
+                            <div class="slds-truncate" title="{!Lead.Name}">{!Lead.Phone}</div>
+                        </td>
+                        <td scope="row" data-label="Opportunity Name">
+                            <div class="slds-truncate" title="{!Lead.Name}">{!Lead.Status}</div>
+                        </td>
+                        <td scope="row" data-label="Opportunity Name">
+                            <div class="slds-truncate" title="{!Lead.Name}">{!Lead.LeadSource}</div>
+                        </td>
+                    </tr>
+                </aura:iteration>	
+            </tbody>
+        </table>
+        <aura:set attribute="else"  >
+            <c:CaseCrerationUI_cmp/>
+        </aura:set>
+    </aura:if>
+</aura:component>

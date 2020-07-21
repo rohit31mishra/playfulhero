@@ -1,0 +1,43 @@
+<apex:page controller="OpportunityListController" sidebar="false" showHeader="false">
+    <apex:form >
+
+        <apex:inputText value="{!searchstring}" label="Input" />
+        <apex:commandButton value="Search records" action="{!search}" reRender="therepeat,thepanel" />
+        <br/><br/>
+        <table cellpadding="0" cellspacing="0" border="1">
+            <tr>
+                <th>Name</th>
+                <th>Close Date</th>
+                <th>Stage</th>
+            </tr>
+            <apex:repeat var="opp" value="{!OpportunityList}">
+                <tr>
+                    <td>
+                        <apex:outputLink value="{!URLFOR($Action.Opportunity.View, opp.Id)}">
+                            {!opp.Name}
+                        </apex:outputLink>
+                    </td>
+                    <td>
+                        <apex:outputText value="{0,date,MM/dd/yy}">
+                            <apex:param value="{!opp.CloseDate}" />
+                        </apex:outputText>
+                    </td>
+                    <td>{!opp.stagename}</td>
+                </tr>
+            </apex:repeat>
+        </table>
+        <br/><br/>
+        <b>Search Table show here</b>
+        <apex:outputPanel id="thepanel">
+            <table cellpadding="0" cellspacing="0" border="1">
+                <apex:repeat var="opp" value="{!opplist}" id="therepeat">                
+                    <tr>
+                        <td>{!opp.name}</td> 
+                    </tr>
+                </apex:repeat>
+            </table>
+        </apex:outputPanel>
+
+
+    </apex:form>
+</apex:page>

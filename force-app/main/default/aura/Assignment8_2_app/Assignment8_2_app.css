@@ -1,0 +1,34 @@
+.THIS {
+}
+
+.THIS .inValidEmail{
+    background-color: #ff1e1e;
+    color: white;
+}
+
+.THIS .validEmail{
+    background-color: #41d626;
+    color: white;
+}
+.THIS .none{
+    display : none;
+}
+
+.THIS .AddBtnCls:after {
+  content:'Remove'; 
+  visibility: visible;
+  /*display: block;
+  position: absolute;
+  background-color: red;
+  padding: 5px;
+  top: 2px;*/
+}
+.THIS .RemoveBtnCls:after {
+  content:'Add'; 
+  visibility: visible;
+  /*display: block;
+  position: absolute;
+  background-color: red;
+  padding: 5px;
+  top: 2px;*/
+}

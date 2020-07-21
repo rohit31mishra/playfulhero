@@ -1,0 +1,50 @@
+<aura:component controller="AccountWizard">
+    <aura:attribute name="OpportunityList" type="Opportunity[]"/> 
+    <aura:attribute name="contactList" type="Contact[]"/> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="DeleteRowEvt" event="c:DeleteRowEvt" action="{!c.removeDeletedRow}"/>
+    <aura:handler name="AddRowEvt" event="c:AddNewRowEvt" action="{!c.addNewRow}"/>
+    <aura:attribute name="AccountName" type="String"/>
+    <aura:attribute name="conAttr" type="Contact"/>
+    <aura:attribute name="currentStep" type="String"/>
+   <aura:if isTrue="{!v.currentStep == '3'}">
+       <div>
+            <span><h6>Opportunity Details</h6></span>
+        </div>
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+        <thead>
+            <tr class="slds-text-title_caps">
+                <th scope="col">
+                    <div class="slds-truncate">S.No</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="First Name">First Name</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Last Name">Last Name</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Phone">Phone</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate">Account Name</div>
+                </th>
+            </tr>
+        </thead>   
+        <tbody>
+            <aura:iteration items="{!v.OpportunityList}" var="item" indexVar="index">
+                <c:ContactWizardItem ContactInstance="{!item}" AccountName="{!v.AccountName}" rowIndex="{!index}" />
+            </aura:iteration>
+        </tbody>
+    </table>
+    <div class="slds-clearfix">
+            <div class="slds-float_left">
+                <!--disabled the back button on first Tab-->    
+                <lightning:button variant="neutral" label="Back to Contact" onclick="{!c.backToCon}" />
+            </div>
+            <div class="slds-float_right">
+                <lightning:button variant="brand" label="Save" onclick="{!c.Save}"  />
+            </div>
+        </div>
+    </aura:if>
+</aura:component>

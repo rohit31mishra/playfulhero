@@ -1,0 +1,4 @@
+<aura:component >
+	
+    <c:ChartComp/><!--http://mylightningforce.com/2017/11/lightningchart/ -->
+</aura:component>

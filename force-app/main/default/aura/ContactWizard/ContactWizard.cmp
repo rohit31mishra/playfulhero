@@ -1,0 +1,57 @@
+<aura:component >
+    <aura:attribute name="contactList" type="Contact[]"/> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="DeleteRowEvt" event="c:DeleteRowEvt" action="{!c.removeDeletedRow}"/>
+    <aura:handler name="AddRowEvt" event="c:AddNewRowEvt" action="{!c.addNewRow}"/>
+    <aura:attribute name="str" type="String"/>
+    <aura:attribute name="conAttr" type="Contact"/>
+    <aura:attribute name="currentStep" type="String"/>
+    <aura:attribute name="AccountName" type="String"/>
+    
+    <aura:attribute name="openOPannel" type = "boolean" />
+    
+    <aura:if isTrue="{!v.currentStep == '2'}">
+        <div>
+            <span><h6>Contact Details</h6></span>
+        </div>
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th scope="col">
+                        <div class="slds-truncate">S.No</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="First Name">First Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Last Name">Last Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Phone">Phone</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate">Account Name</div>
+                    </th>
+                </tr>
+            </thead>   
+            <tbody>
+                <aura:iteration items="{!v.contactList}" var="item" indexVar="index">
+                    <c:ContactWizardItem ContactInstance="{!item}" AccountName="{!v.AccountName}" rowIndex="{!index}" />
+                </aura:iteration>
+            </tbody>
+        </table>
+        <div class="slds-clearfix">
+            <div class="slds-float_left">
+                <!--disabled the back button on first Tab-->    
+                <lightning:button variant="neutral" label="Back to account" onclick="{!c.backToAcc}" />
+            </div>
+            <div class="slds-float_right">
+                <lightning:button variant="brand" label="Next to Oppty" onclick="{!c.nextToOppty}"  />
+            </div>
+        </div>
+    </aura:if>
+     <aura:if isTrue="{!v.openOPannel}">
+            <c:OpportunityWizard contactList="{!v.contactList}" AccountName="{!v.AccountName}" currentStep="{!v.currentStep}"/>
+     </aura:if>   
+    
+</aura:component>

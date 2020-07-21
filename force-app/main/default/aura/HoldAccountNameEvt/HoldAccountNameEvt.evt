@@ -1,0 +1,3 @@
+<aura:event type="Application" description="Use For Account Name">
+    <aura:attribute name="AccName" type="String" description="Passing Account Name" />
+</aura:event>

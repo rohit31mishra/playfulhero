@@ -1,0 +1,53 @@
+<aura:component >
+    <aura:attribute name="AccountInstance" type="Account"/>
+    <aura:registerEvent name="accNameEvt" type="c:HoldAccountNameEvt"/> 
+    <aura:attribute name ="AccountName" type="String"/>
+    <aura:registerEvent name="contactPnlEvt" type="c:openContactPanel"/> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div>
+        <span><h6>Account Details</h6></span>
+    </div>
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+        <thead>
+            <tr class="slds-text-title_caps">
+                <th scope="col">
+                    <div class="slds-truncate">S.No</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="First Name">First Name</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Last Name">Last Name</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Phone">Phone</div>
+                </th>
+            </tr>
+        </thead>   
+        <tbody>
+            <tr class="slds-text-title_caps">
+                <td> 
+                    {!v.rowIndex + 1}
+                </td>
+                <td>
+                    <ui:inputText class="slds-input" value="{!v.AccountInstance.FirstName}"/>
+                </td>
+                <td>
+                    <ui:inputText class="slds-input" value="{!v.AccountInstance.LastName}"/>
+                </td>
+                <td>
+                    <ui:inputPhone class="slds-input" value="{!v.AccountInstance.Phone}"/>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+    <a onclick="{!c.createContactPannel}">
+        <lightning:icon iconName="action:add_contact" class="slds-icon slds-icon_large" size="large" alternativeText="Create Contact"/>
+        <span class="slds-assistive-text">Add Contact</span>
+    </a>   
+    <a onclick="{!c.createOpportunityPannel}">
+        <lightning:icon iconName="action:new_opportunity" class="slds-icon slds-icon_large" size="large" alternativeText="Create Opportunity"/>
+        <span class="slds-assistive-text">Add Opportunity</span>
+    </a>
+</aura:component>

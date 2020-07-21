@@ -1,0 +1,4 @@
+<aura:component >
+	<aura:registerEvent name="localName" type="c:Assign_1Evt" />
+    <lightning:button label="Click Me!" onclick="{!c.passMsg}"/>
+</aura:component>

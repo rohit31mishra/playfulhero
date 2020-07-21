@@ -1,0 +1,5 @@
+<aura:component >
+    <aura:registerEvent name="displayMsgEvt" type="c:Assignment_3_1_evt" />
+    <lightning:button label="Click Me !" onclick="{!c.passMsg}"/>
+    <!--aura:registerEvent name="componentEventFired" type="c:compEvent"/-->
+</aura:component>

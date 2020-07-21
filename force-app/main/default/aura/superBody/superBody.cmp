@@ -1,0 +1,4 @@
+<!--c:superBody-->
+<aura:component extensible="true">
+    Parent body: {!v.body}
+</aura:component>

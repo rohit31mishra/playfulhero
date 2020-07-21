@@ -1,0 +1,4 @@
+<!--c:subBody-->
+<aura:component extends="c:superBody">
+    Child body: {!v.body}
+</aura:component>

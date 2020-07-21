@@ -1,0 +1,42 @@
+<apex:page controller="JSremotingfunction" showHeader="false">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous">
+    </script>    
+ 
+    <script type="text/javascript">
+        $j=jQuery.noConflict();
+        function Contact() {
+            this.firstname = null;
+            this.lastname = null;
+            this.email = null;
+        }       
+        function createContact() {
+            var contactObj = new Contact();
+            contactObj.firstname = $j('[id$="firstnameid"]').val();
+            contactObj.lastname = $j('[id$="lastnameid"]').val();
+            contactObj.email = $j('[id$="emailid"]').val();
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.JSremotingfunction.createContact}', 
+                                                      contactObj, function(result,event) {
+                                                          console.log(event);
+                                                          $j('[id$="output1"]').text('Contact inserted using method successfully'); 
+                                                      }
+                                                     );
+        }
+        
+     </script>
+ 
+    <apex:form >
+        <apex:pageBlock >
+        <apex:outputPanel id="output">
+            <apex:pageBlockSection columns="1">
+ 
+                <apex:inputText id="firstnameid" label="First Name"/>
+                <apex:inputText id="lastnameid" label="Last Name"/>
+                <apex:inputText id="emailid" label="Email"/>
+                <apex:commandButton value="Submit" onclick="createContact();" reRender="output"/>
+                <apex:outputtext id="output1" label="Result"></apex:outputtext>
+ 
+            </apex:pageBlockSection>
+        </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,13 @@
+<apex:page standardController="Account"  extensions="AccountStdCntrl">
+<apex:form >
+        <!-- Define the JavaScript function sayHello-->
+        <apex:actionFunction name="save" action="{!save}" rerender="out" status="myStatus" oncomplete="onloadfunction()"/>
+    </apex:form>
+<script>window.setTimeout(save,2)</script>
+<script>
+
+        function onloadfunction(){
+            window.open('/'+'0016F00002o1UD4');
+        }
+</script>
+</apex:page>

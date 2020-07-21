@@ -1,0 +1,126 @@
+<aura:component controller="CaseCreationCls">
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:attribute name="statusOptions" type="List" />
+    <aura:attribute name="caseOriginOptions" type="List" />
+    <aura:attribute name="typeOptions" type="Map" />
+    <aura:attribute name="phone" type="Integer" />
+    <aura:attribute name="subject" type="String" />
+    <aura:attribute name="selTypeOption" type="String" />
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="fieldTitle" type="String" />
+    
+    <aura:attribute name="errorfrm" type="String"/>
+    <aura:attribute name="caseItem" type="Case" default="{'ContactPhone':'',
+                                                         'Subject':'',
+                                                         'Origin':'--None--',
+                                                         'Type':'',
+                                                         'Status':'New',
+                                                         'sobjectType':'Case'}"/>
+    {!v.errorfrm}
+    <fieldset class="slds-form-element slds-form_compound slds-size_1-of-2 slds-align_absolute-center">
+        
+        <legend class="slds-form-element__legend slds-form-element__label">
+            <lightning:icon iconName="action:new_case" size="small" />Case Creation</legend>
+        <div class="slds-form-element__control">
+            <div class="slds-form-element__group">
+                <div class="slds-form-element__row">
+                    <div class="slds-form-element slds-size_1-of-2">
+                        <div class="slds-form-element__control">
+                            <div class="slds-form-element__group">
+                                <div class="slds-form-element__row">
+                                    <div class="slds-form-element slds-size_1-of-12">
+                                        <lightning:icon iconName="standard:call" size="small" title="Phone Number" onclick="{!c.openPopup}"/>
+                                    </div>
+                                    <div class="slds-form-element slds-size_11-of-12">
+                                        <lightning:input type="tel" name="input1" required="true" value="{!v.caseItem.ContactPhone}" label="Phone" maxlength="10" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-form-element slds-size_1-of-2">
+                        <div class="slds-form-element__control">
+                            <lightning:input type="text" name="input2"  value="{!v.caseItem.Subject}" label="Subject" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="slds-form-element slds-form_compound slds-form-element_address slds-size_1-of-2 slds-align_absolute-center">
+        <legend class="slds-form-element__legend slds-form-element__label">Type</legend>
+        <div class="slds-form-element__control">
+            <!--<aura:iteration items="{!v.typeOptions}" var="option" indexVar="idx"> 
+                <lightning:input type="radio" label="{!option}" name="options" value="{!v.caseItem.Type}"/>
+            </aura:iteration> -->
+            <lightning:radioGroup name="radioGroup"
+                                  label="Type"
+                                  options="{!v.typeOptions}"
+                                  value="{!v.caseItem.Type}"
+                                  type="radio"/>
+        </div>
+    </fieldset>
+    <fieldset class="slds-form-element slds-form_compound slds-form-element_address slds-size_1-of-2 slds-align_absolute-center">
+        <div class="slds-form-element__control">
+            <div class="slds-form-element__group">
+                <div class="slds-form-element__row">
+                    <div class="slds-form-element slds-size_1-of-2">
+                        <div class="slds-form-element__control">
+                            <lightning:select label="Status" name="acc" aura:id="acc" value="{!v.caseItem.Status}"> 
+                                <aura:iteration items="{!v.statusOptions}" var="options">
+                                    <option value="{!options}">{!options}</option>
+                                </aura:iteration>
+                            </lightning:select>
+                        </div>
+                    </div>
+                    <div class="slds-form-element slds-size_1-of-2">
+                        <div class="slds-form-element__control">
+                            <lightning:select label="Case Origin" name="acc" aura:id="acc" value="{!v.caseItem.Origin}"> 
+                                <aura:iteration items="{!v.caseOriginOptions}" var="optionVar">
+                                    <option value="{!optionVars}">{!optionVar}</option>
+                                </aura:iteration>
+                            </lightning:select>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="slds-form-element slds-form_compound slds-form-element_address slds-size_1-of-2 slds-align_absolute-center">
+        <div class="slds-form-element__control">
+            <div class="slds-form-element__group">
+                <div class="slds-form-element__row">
+                    <div class="slds-form-element slds-size_1-of-2">
+                        <div class="slds-form-element__control">
+                            <lightning:button  variant="brand" label="Save" onclick="{! c.Save }" />            
+                        </div>
+                    </div>
+                    <div class="slds-form-element slds-size_1-of-2 slds-float_left">
+                        <div class="slds-form-element__control">
+                            <lightning:button  variant="brand" label="Cancel" onclick="{! c.Cancel }" />            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <aura:if isTrue="{!v.isOpen}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.fieldTitle}</h2>
+                </header>
+                <footer class="slds-modal__footer">
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+</aura:component>

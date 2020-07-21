@@ -1,0 +1,14 @@
+<aura:component >
+    <aura:attribute name="ContactInstance" type="Contact"/>
+    <tr class="slds-text-title_caps">
+        <td>
+            <ui:inputText class="slds-input" value="{!v.ContactInstance.FirstName}"/>
+        </td>
+        <td>
+            <ui:inputText class="slds-input" value="{!v.ContactInstance.LastName}"/>
+        </td>
+        <td>
+            <ui:inputPhone class="slds-input" value="{!v.ContactInstance.Phone}"/>
+        </td>
+    </tr>
+</aura:component>

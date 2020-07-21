@@ -1,0 +1,5 @@
+<aura:component implements="flexipage:availableForAllPageTypes">
+   <!-- <lightning:button label="Create Oppty" variant="brand" onclick="{!c.createOppty}"/> -->
+    <lightning:recordEditForm  aura:id='form' objectApiName='Opportunity'    onload='{!c.onLoad}'/>
+
+</aura:component>

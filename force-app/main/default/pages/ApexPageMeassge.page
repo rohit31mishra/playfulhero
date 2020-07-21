@@ -1,0 +1,25 @@
+<apex:page standardController="Account" extensions="ErrorMessageInVfController">
+ <apex:form id="form">
+   <apex:pageblock id="pageblock">
+   <div id="msgDiv">
+      <apex:pageMessages id="showmsg"></apex:pageMessages>
+      <script>
+      setTimeout(function () {
+        document.getElementById('msgDiv').style.display='none';
+    }, 10000);
+  
+  
+  </script>
+      </div>
+         <apex:panelGrid columns="2">
+           Account Name: <apex:inputText value="{!acc.name}"/>
+           Account Number: <apex:inputText value="{!acc.AccountNumber}"/>
+           Account Phone: <apex:inputText value="{!acc.phone}"/>
+           Account Site: <apex:inputText value="{!acc.site}"/>
+           Account Industry: <apex:inputText value="{!acc.industry}"/>
+           <apex:commandButton value="Update" action="{!save}" style="width:90px" rerender="showmsg"/>
+         </apex:panelGrid>
+    </apex:pageblock>
+ </apex:form>
+ 
+</apex:page>

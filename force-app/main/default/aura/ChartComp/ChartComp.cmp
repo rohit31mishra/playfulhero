@@ -1,0 +1,11 @@
+<aura:component controller="FileUploadController" implements="flexipage:availableForAllPageTypes" access="global">
+    <!--ltng:require scripts="{!$Resource.Chart}" afterScriptsLoaded="{!c.ctr}"/ -->
+    <ltng:require scripts="{!$Resource.Chart}"/>
+    <aura:handler name="cmpEvent" event="c:holdMapForBarGraphEvent" action="{!c.ctr}"/>
+    <c:UploadWizard/><!--http://sfdcmonkey.com/2017/09/25/file-upload-lightning-component/-->
+    <div class="slds-col slds-size--1-of-1 slds-small-size--1-of-2 slds-medium-size--3-of-4">
+        <canvas aura:id="barChart" id="barChart" />
+    </div>
+        <!--canvas aura:id="lineChart" id="lineChart"/-->
+    
+</aura:component>

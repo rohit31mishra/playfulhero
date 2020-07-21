@@ -1,0 +1,26 @@
+<aura:component >
+    <aura:handler name="init" value="{!this}" action="{!c.init }" />
+    <div class="slds">
+        <div class="slds-page-header" role="banner">
+            <p class="slds-float_right slds-text-body_small">Rohit Requested: </p>
+            <div class="slds-text-heading--medium">Business Financing Details for <span style="font-weight: bold">hello </span></div>
+        </div>
+        <lightning:tabset selectedTabId="eligibilitydata" variant = "scoped">
+            <lightning:tab label="Eligibility" id="eligibilitydata">
+                
+                <div onclick="{!c.handleClick}" data-value="123">
+                    <lightning:button label="Remove" iconName="utility:delete" iconPosition="left"  variant="destructive" value="123"/>
+                </div>
+                <td><a  data-record="rohit"  data-record1="rsssohit"  onclick="{!c.handleClick}">
+                    <p>rohit</p></a></td>
+            </lightning:tab>
+            
+            <lightning:tab label="Eligibility" id="eligibilitydata1">
+                <c:WrapperLearn_cmp/>
+            </lightning:tab>
+             <lightning:tab label="Data Table with Pagination" id="dataTable">
+                <c:dataTableWithPagination/>
+            </lightning:tab>
+        </lightning:tabset>
+    </div>
+</aura:component>

@@ -1,0 +1,11 @@
+<aura:component controller="ApexZipSampleController" implements="force:appHostable,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes" access="global"  >
+     <aura:attribute name="zipFileId" type="string" default=""/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:if isTrue="{!zipFileId != ''}">
+    <div><a href="{!'/servlet/servlet.FileDownload?file=' + zipFileId}">
+                                                    <img class="SUPIP_DownldBtn" id="SUPIP_DownldBtn" src="{!$Resource.Upload}" />
+                                                    </a></div>
+        
+         <ui:button label="navigateToURL" press="{!c.gotoURL}" />
+    </aura:if>
+</aura:component>

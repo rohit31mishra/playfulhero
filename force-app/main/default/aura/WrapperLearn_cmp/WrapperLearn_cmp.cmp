@@ -1,0 +1,33 @@
+<aura:component controller="LightningTab_LightningDatatable_cls">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="accRecords" type="object[]" />
+    <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table_col-bordered slds-p-around_x-small" role="grid">
+        <thead style="background-color:#f4f6fe">
+            <tr>
+                <th class="slds-cell-wrap slds-text-align_center" scope="col">hshhs</th>
+                <th class="slds-cell-wrap slds-text-align_center" scope="col">hshhs</th>
+                <th class="slds-cell-wrap slds-text-align_center" scope="col">hshhs</th>
+            </tr>
+        </thead>
+        <tbody >
+            <!-- TO Check if list is not empty-->
+            <aura:iteration var="bfe" items="{!v.accRecords}" >
+                <tr>
+                    <td><div class="slds-truncate slds-text-align_center">{!bfe.title}</div></td>
+                    <td><div class="slds-truncate slds-text-align_center">{!bfe.description}</div></td>
+                    <td><div class="slds-truncate slds-text-align_center">
+                                
+                                <td>
+                                    <tr><div class="slds-truncate slds-text-align_center">{!bfe.location.street}</div></tr>
+                                    <tr><div class="slds-truncate slds-text-align_center">{!bfe.location.postalcode}</div></tr>
+                                    <tr><div class="slds-truncate slds-text-align_center">{!bfe.location.city}</div></tr>
+                                    <tr><div class="slds-truncate slds-text-align_center">{!bfe.location.state}</div></tr>
+                                    <tr><div class="slds-truncate slds-text-align_center">{!bfe.location.Country}</div></tr>
+                                </td>
+                        </div>
+                    </td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+</aura:component>

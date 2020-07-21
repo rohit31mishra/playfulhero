@@ -1,0 +1,80 @@
+<aura:component controller="contactQuickActionCtlr" implements="force:hasRecordId,force:lightningQuickAction,flexipage:availableForAllPageTypes"  access="global">
+    <!--http://sfdcmonkey.com/2018/01/05/lightning-datatable-base-component/-->
+    <!--https://sfdcpanther.wordpress.com/2017/11/29/how-to-implement-pagination-in-lightning-component-client-sidejs/ -->
+    <!-- https://github.com/amitastreait/Pagination-in-Lightning-Component -->
+    <aura:attribute name="mydata" type="Object"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="page" type="integer" description="using for store page Number"/>
+    <aura:attribute name="tableColumns" type="Object"/>
+    <aura:handler name="change"	value="{!v.pageNumber}"	action="{!c.renderPage}" />
+    <aura:attribute name="paginationList" type="Object"/>
+    <aura:attribute name="pages" type="integer" description="using for store All Pages page Number"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute type="Integer" name="pageNumber" default="1" />
+    <aura:attribute type="Integer" name="maxPage" default="1" />
+    <aura:attribute name="startPage" type="Integer" />
+    <aura:attribute name="endPage" type="Integer"/>
+    <aura:attribute name="totalRecords" type="Integer"/>
+    <aura:attribute name="pageSize" type="Integer" default="5"/>
+    <aura:attribute name="isSending" type="boolean" />
+    <!-- Spinner Start, show the loading screen while 
+   Client side controller(JS) is communicating with Server Side(APEX) controller -->
+    <aura:if isTrue="{!v.isSending}">
+        <div class="slds-spinner_container">
+            <div class="slds-spinner--brand slds-spinner slds-spinner--large" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    <!-- Spinner End -->
+    <!-- <lightning:datatable data="{! v.mydata }" 
+                         columns="{! v.mycolumns }" 
+                         keyField="Id"/> 
+ <lightning:button disabled="{!v.page == 1}" variant="brand" label="Previous Page" onclick="{! c.navigate }" />            
+    <lightning:button disabled="{!v.page == v.pages}" aura:id="previousPage" variant="brand" label="Next Page" onclick="{! c.navigate }" />-->
+    
+    <div class="slds-p-around_x-Medium">
+        <div style="height:325px;">
+            <div class="slds-scrollable_y" style="height:80%;">
+                <table id="beftable" class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table_col-bordered slds-p-around_x-small" role="grid">
+                    <thead style="background-color:#f4f6fe">
+                        <tr>
+                            <aura:iteration items="{!v.mycolumns}" var="tableColumn" >
+                                <th class="slds-cell-wrap slds-text-align_center" scope="col">{!tableColumn}</th>
+                            </aura:iteration>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- TO Check if list is not empty-->
+                        <aura:iteration var="colVal" items="{!v.paginationList}" >
+                            <tr>
+                                <td><div class="slds-truncate slds-text-align_center">{!colVal.Name}</div></td>
+                                <td><div class="slds-truncate slds-text-align_center">{!colVal.Fax}</div></td>
+                                <td><div class="slds-truncate slds-text-align_center">{!colVal.Phone}</div></td>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+            <div class="slds-float_right">
+                <!--     <aura:if isTrue="{!v.maxPage >= 2}">
+                    <c:Pagination currentPageNumber="{!v.pageNumber}"
+                                  maxPageNumber="{!v.maxPage}" />
+                </aura:if> -->
+                <lightning:buttonGroup >
+                    <lightning:button label="Previous" disabled="{!v.startPage == 0}"  
+                                      onclick="{!c.previous}" variant="brand"
+                                      iconName='utility:back'/>
+                    &nbsp; &nbsp; &nbsp;
+                    <lightning:button label="Next" disabled="{!v.endPage >= v.totalRecords}" 
+                                      onclick="{!c.next}" variant="brand"
+                                      iconName='utility:forward' iconPosition='right'/>
+                </lightning:buttonGroup>
+            </div>
+        </div>
+    </div>
+    
+</aura:component>

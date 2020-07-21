@@ -1,0 +1,7 @@
+<aura:component >
+    <aura:attribute name="msgToDisplay" type="String"/>
+    
+    <aura:handler name="displayMsgEvt" event="c:Assignment_3_1_evt" action="{!c.showMsg}"/>
+   sdfsdfsdfsdfsdfszdf {!v.msgToDisplay}
+    
+</aura:component>

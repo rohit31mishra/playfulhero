@@ -1,0 +1,8 @@
+<aura:component >
+	<aura:handler event="c:Assign_1Evt" action="{!c.handleAppEvent}" />
+    <aura:attribute name="showMsg" type="Boolean"/>
+    
+    <aura:if isTrue="{!v.showMsg}">
+                     Hahahahhahahahahhahahah 
+      </aura:if>
+</aura:component>

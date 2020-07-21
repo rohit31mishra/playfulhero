@@ -1,0 +1,14 @@
+<aura:component >
+    <div class="slds-page-header" role="banner">
+        <h1 class="slds-page-header__title slds-m-right--small slds-align-middle slds-truncate" title="this should match">
+            Lightning Assignment
+        </h1>
+        <article class="slds-card slds-col slds-size_7-of-12">
+            <div class="slds-card__header slds-grid">
+                Send Email
+            </div>
+        </article>
+        <div class="slds-text-color--weak">Assignment No 1</div>
+    </div>
+ 
+</aura:component>

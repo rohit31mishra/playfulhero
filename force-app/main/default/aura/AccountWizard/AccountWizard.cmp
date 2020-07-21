@@ -1,0 +1,70 @@
+<aura:component >
+    <!--aura:registerEvent name="accNameEvt" type="c:HoldAccountNameEvt"/--> 
+    <aura:attribute name ="AccountName" type="String" default=""/>
+    <aura:attribute name="openCPannel" type = "boolean" />
+    <aura:attribute name="openOPannel" type = "boolean" />
+    <aura:attribute name="AccountInstance" type="Account"/>
+    <aura:attribute name="OpportunityInstance" type="Opportunity"/>
+    <aura:handler name="change" value="{!v.str}" action="{!c.strChanged}"/>
+    <aura:handler name="change" value="{!v.conAttr}" action="{!c.conAttrChanged}"/>
+    <aura:handler name="change" value="{!v.progressVal}" action="{!c.progressValUpdate}"/>
+    <aura:attribute name="str" type="String" default="Stringgg" />
+    <aura:attribute name="currentStep" type="string" default="1"/>
+    <aura:attribute name="pannelName" type="String"/>
+    <aura:attribute name="conAttr" type="Contact"
+                    default="{ 'sobjectType': 'Contact',
+                             'Firstname': 'Name'
+                             }" />
+    <aura:attribute name="opptyAttr" type="Opportunity"
+                    default="{ 'sobjectType': 'Opportunity',
+                             'Firstname': 'Name'
+                             }" />
+    <!--c:AccountWizardItem/-->
+    <article class="slds-card slds-col slds-size_7-of-12">
+        <lightning:progressIndicator currentStep="{!v.currentStep}" type="path" >
+            <lightning:progressStep label="Fill Account Details" value="1" onclick="{!c.selectFromHeaderStep1}"/>
+            <lightning:progressStep label="Fill Contact Details" value="2" onclick="{!c.selectFromHeaderStep2}"/>
+            <lightning:progressStep label="Fill Opportunity Details" value="3" onclick="{!c.selectFromHeaderStep3}"/>
+        </lightning:progressIndicator>
+        
+        <aura:if isTrue="{!v.currentStep == '1'}">
+            <div>
+            <span><h6>Account Details</h6></span>
+        </div>
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        <th scope="col">
+                            <div class="slds-truncate" title="First Name">Enter Account Name</div>
+                        </th>
+                    </tr>
+                </thead>   
+                <tbody>
+                    <tr class="slds-text-title_caps">
+                        <td>
+                            <ui:inputText class="slds-input slds-size_7-of-12" value="{!v.AccountName}"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="slds-clearfix">
+                <div class="slds-float_right">
+                    <lightning:button variant="brand" label="Next to Contact" onclick="{!c.showContactPannel}"  />
+                </div>
+            </div>
+        </aura:if>
+        
+        
+        <!--<a onclick="{!c.showContactPannel}">
+            <lightning:icon iconName="action:add_contact" class="slds-icon slds-icon_large" size="large" alternativeText="Create Contact"/>
+            <span class="slds-assistive-text">Add Contact</span>
+        </a>   
+        <a onclick="{!c.showOpportunityPannel}">
+            <lightning:icon iconName="action:new_opportunity" class="slds-icon slds-icon_large" size="large" alternativeText="Create Opportunity"/>
+            <span class="slds-assistive-text">Add Opportunity</span>
+        </a> -->
+        <aura:if isTrue="{!v.openCPannel}">
+            <c:ContactWizard conAttr="{!v.conAttr}" str="{!v.str}" AccountName="{!v.AccountName}" currentStep="{!v.currentStep}"/>
+        </aura:if>  
+    </article>
+</aura:component>
